@@ -28,6 +28,7 @@ const drawerWidth = 280;
 
 function Navigation(props) {
   const { window } = props;
+ 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {

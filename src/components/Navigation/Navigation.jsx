@@ -21,9 +21,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import logoPic from '../../docs/logo.svg'
 
-
-
-
 const drawerWidth = 280;
 
 function Navigation(props) {

@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import theme from '../theme/theme';
 import createEmotionCache from '../lib/createEmotionCache';
-import Navigation from '../components/Navigation/Navigation'
+import Navigation from '../components/Navigation/index'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

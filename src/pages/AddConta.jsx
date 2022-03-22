@@ -1,13 +1,13 @@
 import { Box, Toolbar, Typography, Container, Button } from "@mui/material"
+import TitleSection from "../components/TitleSection"
 
 
 export default function AddConta(){
     return(
-        <Box sx={{ display: 'flex', marginTop: '2rem'}}>
+        <Box sx={{ display: 'flex', marginTop: '3rem'}}>
             <Box 
             sx={{ flexGrow: 1, p: 3  }}>
-            <Typography variant='h3' sx={{marginBottom: '2rem', fontWeight: 'bold'}}>Adicionar Conta</Typography>     
-
+           <TitleSection>Adicionar Conta</TitleSection>
     
     
             </Box>

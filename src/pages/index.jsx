@@ -8,9 +8,9 @@ import TitleSection from "../components/TitleSection";
 export default function Home() {
 
   const cards = [
-    {title: 'Contas a pagar', price: 1020, percent: '8.8%' , status:'down'},
-    {title: 'Contas a receber', price: 550, percent: '5.8%' , status:'up'},
-    {title: 'Despesas fixas', price: 500, percent: '15%' , status:'up'}
+    {title: 'Contas a pagar', price: 1020, percent: '8.8%' , status: false},
+    {title: 'Contas a receber', price: 550, percent: '5.8%' , status:true},
+    {title: 'Despesas fixas', price: 500, percent: '15%' , status:true}
   ]
 
   return (
@@ -21,7 +21,7 @@ export default function Home() {
     <Box sx={{ display: 'flex', flexWrap:'wrap', marginTop: '2rem'}}>
       {cards.map(card => {
           return (
-              <CardMain key={card.title} cardTitle={card.title} cardPrice={card.price} cardPercent={card.percent}/>
+              <CardMain key={card.title} cardTitle={card.title} cardPrice={card.price} cardPercent={card.percent} cardStatus={card.status}/>
           )
         })}
     </Box>

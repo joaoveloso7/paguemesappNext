@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState } from 'react';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,6 +20,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import Image from 'next/image';
 import logoPic from '../../docs/logo.svg'
 
@@ -26,13 +31,13 @@ const drawerWidth = 280;
 function Navigation(props) {
   const { window } = props;
  
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -46,54 +51,71 @@ function Navigation(props) {
     {name:'Cofrinho Nubank', path:'Nubank', status: 'disabled'}
   ]
 
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  }));
+
 
   const drawer = (
-    <Box sx={{display: 'flex', flexDirection:'column', alignItems: 'center'}}>
-      <Toolbar  />
-      
-      <Image
-        src={logoPic}
-        alt="Picture of the author"
-      />
+    <Box sx={{}}>
+        <DrawerHeader >
+          <IconButton onClick={handleDrawerToggle} sx={{display: { sm: 'none', xs: 'block' }}} >
+           <ChevronRightIcon sx={{color: 'text.primary'}} />
+          </IconButton>
+        </DrawerHeader>
 
-      <List component="nav" aria-label="main mailbox folders" sx={{paddingTop: '3rem'}}>
-        {Routes.map((text, index) => (
-        <Link href={'/' + text.path}>
-          <ListItemButton button key={text.name} disabled={text.status === 'disabled' ? true : false} selected={selectedIndex === index}
-          onClick={(event) => handleListItemClick(event, index)} 
-          sx={{ 
-            marginTop: '.8rem', 
-            '&.Mui-selected': {
-              borderRadius: '.6rem',        
-              backgroundColor: 'secondary.main',
-              '&:hover': {
+      {/* <Toolbar  /> */}
+      
+
+      <Box sx={{display: 'flex', flexDirection:'column', alignItems: 'center'}}>
+      <Image
+          src={logoPic}
+          alt="Logo"
+        />
+        <List component="nav" aria-label="main mailbox folders" sx={{paddingTop: '3rem'}}>
+
+          {Routes.map((text, index) => (
+          <Link href={'/' + text.path}>
+            <ListItemButton button key={text.name} disabled={text.status === 'disabled' ? true : false} selected={selectedIndex === index}
+            onClick={(event) => handleListItemClick(event, index)} 
+            sx={{ 
+              marginTop: '.8rem', 
+              '&.Mui-selected': {
+                borderRadius: '.6rem',        
                 backgroundColor: 'secondary.main',
-              }
-            },
-          }}
-          >
-            <ListItemIcon sx={{ color:'text.primary' }}>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon  />}
-            </ListItemIcon>
-            <ListItemText primary={text.name} sx={{fontWeight: '700'}}/>
-          </ListItemButton>
-        </Link>
-        ))}
-      </List>
+                '&:hover': {
+                  backgroundColor: 'secondary.main',
+                }
+              },
+            }}
+            >
+              <ListItemIcon sx={{ color:'text.primary' }}>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon  />}
+              </ListItemIcon>
+              <ListItemText primary={text.name} sx={{fontWeight: '700'}}/>
+            </ListItemButton>
+          </Link>
+          ))}
+        </List>
+      </Box>
     </Box>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', overflow: 'hidden' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-          
+          ml: { sm: `${drawerWidth}px` },          
         }}
       >
         <Toolbar sx={{display: { sm: 'none' }}}>
